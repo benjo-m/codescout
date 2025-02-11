@@ -1,0 +1,205 @@
+<div class="stats-div">
+  <div class="username-div">
+    <div class="user">
+      <i class="bi bi-person person-icon"></i>
+      <h3>{{ user?.username }}</h3>
+    </div>
+    <i
+      *ngIf="isCurrentUser"
+      title="Edit Profile"
+      class="bi bi-pencil pencil"
+      routerLink="/profile/edit"
+    ></i>
+  </div>
+  <div *ngIf="!isCurrentUser" class="controls-div">
+    <button
+      class="buttonBasic"
+      [ngClass]="{
+        buttonWaiting: isWaitingFriendRequestResponse(),
+        ' buttonRemoveFriend': isFriend,
+        buttonAddFriend: !(isWaitingFriendRequestResponse() && isFriend)
+      }"
+      [disabled]="isWaitingFriendRequestResponse()"
+      (click)="btnFriend()"
+    >
+      {{
+        isWaitingFriendRequestResponse()
+          ? "Waiting"
+          : isFriend
+          ? "Remove friend"
+          : "Add friend"
+      }}
+    </button>
+    <button
+      *ngIf="isFriend"
+      class="buttonBasic buttonMessage"
+      [routerLink]="'/social/dm/' + userId"
+    >
+      Message
+    </button>
+  </div>
+  <div *ngIf="isRecruiter()">
+    <div class="information">
+      <h5>INFO</h5>
+      <p class="info-label">Company:</p>
+      <p class="info-data">{{ (user?.company)!.name }}</p>
+
+      <p class="info-label">eMail:</p>
+      <p class="info-data">{{ user?.email }}</p>
+    </div>
+    <div class="location">
+      <h5>LOCATION</h5>
+      <p class="info-label">Street:</p>
+      <p class="info-data">{{ (user?.company)!.address.street }}</p>
+
+      <p class="info-label">City:</p>
+      <p class="info-data">{{ (user?.company)!.address.city }}</p>
+
+      <p class="info-label">Country:</p>
+      <p class="info-data">{{ (user?.company)!.address.country }}</p>
+
+      <p class="info-label">Postal code:</p>
+      <p class="info-data">{{ (user?.company)!.address.postalCode }}</p>
+    </div>
+  </div>
+  <div *ngIf="!isRecruiter()">
+    <div class="stats">
+      <h5>STATS</h5>
+      <div class="stat">
+        <p>Projects submitted</p>
+        <p>{{ userStats?.projectsSubmitted }}</p>
+      </div>
+      <div class="stat">
+        <p>Awards unlocked</p>
+        <p>{{ userStats?.awardsUnlocked }}</p>
+      </div>
+      <div class="stat">
+        <p>Technologies worked with</p>
+        <p>{{ userStats?.technologiesWorkedWith }}</p>
+      </div>
+    </div>
+
+    <div class="top-languages">
+      <h5>TOP 3 TECHNOLOGIES</h5>
+      <div class="stat" *ngFor="let technology of sortedTechnologies()">
+        <p>{{ technology[0] }}</p>
+        <p>{{ technology[1] }} projects submitted</p>
+      </div>
+
+      <div class="stat" *ngIf="sortedTechnologies().length == 0">
+        <p>-</p>
+        <p>0</p>
+      </div>
+      <div class="stat" *ngIf="sortedTechnologies().length == 0">
+        <p>-</p>
+        <p>0</p>
+      </div>
+      <div class="stat" *ngIf="sortedTechnologies().length == 0">
+        <p>-</p>
+        <p>0</p>
+      </div>
+    </div>
+    <div class="awards">
+      <h5>AWARDS</h5>
+      <div class="awards-div">
+        <div *ngFor="let award of user?.awards">
+          <img
+            [src]="
+              awardImagesPath +
+              award.name.toLowerCase().split(' ').join('_') +
+              '.png'
+            "
+            [title]="award.description"
+            style="width: 50px; border-radius: 5px"
+          />
+        </div>
+      </div>
+      <div *ngIf="user?.awards?.length == 0" class="no-awards-div">
+        <span *ngIf="isCurrentUser"> You have not unlocked any awards </span>
+        <span *ngIf="!isCurrentUser">No awards unlocked</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="!isRecruiter()" class="projects-div">
+  <h5>SUBMITTED PROJECTS</h5>
+  <div *ngIf="projects.length != 0" class="headings">
+    <h6 style="padding-left: 10px">Project Name</h6>
+    <h6>Date Submitted</h6>
+    <h6>Due Date</h6>
+  </div>
+  <div class="no-projects" *ngIf="projects.length == 0">
+    No submitted projects
+  </div>
+  <div class="project-list-div">
+    <app-submitted-project-card
+      *ngFor="let project of projects"
+      [project]="project"
+      [routerLink]="['/profile/project', project.id]"
+    ></app-submitted-project-card>
+  </div>
+</div>
+<div class="user-info-div">
+  <div>
+    <h5>ABOUT ME</h5>
+    <p class="bio" *ngIf="user?.biography">
+      {{ user?.biography }}
+    </p>
+    <p class="no-bio" *ngIf="!user?.biography">
+      No biogrpahy.
+      <span *ngIf="isCurrentUser">
+        can add a biography by clicking the pen icon next to you username.
+      </span>
+    </p>
+  </div>
+
+  <h5>SOCIALS</h5>
+  <div class="socials">
+    <p *ngIf="isSocialsEmpty()" style="text-align: center">
+      No social media accounts linked.
+      <span *ngIf="isCurrentUser"
+        >You can add your social media accounts by clicking the pen icon next to
+        you username.</span
+      >
+    </p>
+    <div class="icons-div" *ngIf="this.socials !== 0">
+      <a
+        *ngIf="user?.socials?.gitHub"
+        href="{{ user?.socials?.gitHub }}"
+        target="#"
+      >
+        <img src="../../assets/images/github.png" alt="GitHub" class="icons" />
+      </a>
+      <a href="{{ user?.socials?.linkedIn }}" target="#">
+        <img
+          *ngIf="user?.socials?.linkedIn"
+          src="../../assets/images/linkedin.png"
+          alt="LinkedIn"
+          class="icons"
+      /></a>
+      <a
+        *ngIf="user?.socials?.stackOverflow"
+        class="stackOverflow"
+        href="{{ user?.socials?.stackOverflow }}"
+        target="#"
+      >
+        <img
+          src="../../assets/images/stack-overflow.png"
+          alt="Stack Overflow"
+          class="icons"
+        />
+      </a>
+      <a href="{{ user?.socials?.x }}" target="#" *ngIf="user?.socials?.x">
+        <img src="../../assets/images/x.png" alt="X" class="icons" />
+      </a>
+      <a
+        href="{{ user?.socials?.medium }}"
+        target="#"
+        *ngIf="user?.socials?.medium"
+      >
+        <img src="../../assets/images/medium.png" alt="Medium" class="icons" />
+      </a>
+    </div>
+  </div>
+</div>

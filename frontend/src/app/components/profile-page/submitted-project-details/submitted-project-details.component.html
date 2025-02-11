@@ -1,0 +1,55 @@
+<div class="container">
+  <h5>PROJECT DETAILS</h5>
+  <div class="cont2">
+    <div class="cont3">
+      <div class="item">
+        <span class="lbl">PROJECT NAME:</span><span> {{ project?.name }}</span>
+      </div>
+      <div class="item">
+        <span class="lbl">COMPANY:</span
+        ><span>
+          {{ project?.company?.name }} ({{
+            project?.company?.address?.country
+          }}, {{ project?.company?.address?.city }})</span
+        >
+      </div>
+
+      <div class="item">
+        <span class="lbl">POSITION:</span><span> {{ project?.position }}</span>
+      </div>
+      <br />
+      <span class="lbl">TECHNOLOGIES:</span>
+      <ul>
+        <li *ngFor="let tech of project?.technologies">
+          {{ tech }}
+        </li>
+      </ul>
+      <div class="item">
+        <span class="lbl">DUE DATE:</span><span> {{ project?.dueDate }}</span>
+      </div>
+      <div class="item">
+        <span class="lbl">RECRUITER:</span><span><a [href]="'/profile/' + project?.recruiterId" class="recruiterAnchorTag"> {{ project?.recruiter }}</a></span>
+      </div>
+      <div class="item">
+        <span class="lbl">SUBMITTED AT:</span
+        ><span> {{ project?.submittedAt }}</span>
+      </div>
+      <div class="item">
+        <span class="lbl">YOUR SUBMISSION: </span
+        ><a
+          href="{{ project?.projectUrl }}"
+          target="#"
+          style="color: #c4c4c4"
+          >{{ project?.projectUrl }}</a
+        >
+      </div>
+    </div>
+    <div class="desc-div item">
+      <span class="lbl">DESCRIPTION</span>
+      <p>
+        {{ project?.description }}
+      </p>
+    </div>
+  </div>
+  <button class="btn btn-danger close-btn" routerLink="/profile">Close</button>
+</div>

@@ -1,0 +1,33 @@
+body {
+  background-color: red;
+}
+
+.welcome-container {
+  margin-top: 10%;
+  margin-left: 5%;
+}
+
+.headline-div {
+  display: flex;
+}
+
+.description-div {
+  width: 70%;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+h1 {
+  font-weight: bold;
+}
+
+.slogan {
+  font-style: italic;
+  font-weight: bold;
+}
+
+.re-si {
+  margin-top: 50px;
+  font-size: 18px;
+  font-weight: 600;
+}

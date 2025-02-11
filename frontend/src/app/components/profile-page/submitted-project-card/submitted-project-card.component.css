@@ -1,0 +1,26 @@
+.card {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  font-weight: bold;
+  margin-bottom: 15px;
+  width: 100%;
+  height: 5.7vh;
+}
+
+.card:hover {
+  cursor: pointer;
+}
+
+.card > div {
+  display: flex;
+  width: 20%;
+  text-align: center;
+  justify-content: center;
+  margin: auto;
+  border-radius: 10px;
+  border: 2px solid #383b43;
+  background-color: aliceblue;
+  font-size: 14px;
+  padding: 5px;
+}

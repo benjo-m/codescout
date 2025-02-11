@@ -1,0 +1,28 @@
+<div class="messages-panel">
+  <a class="usernameAnchorTag" [href]="'/profile/' + receiverId">
+  <h5 class="userName">
+      {{ recieverUsername }}
+  </h5>
+  </a>
+  <div
+    #messagesDisplay
+    class="messagesDisplay"
+    (scroll)="onScrollMessagesDisplay(messagesDisplay)"
+  >
+    <p
+      class="messageSender"
+      *ngFor="let message of messages"
+      [ngClass]="{
+        messageSender: isMessageFromSender(message),
+        messageReceiver: !isMessageFromSender(message)
+      }"
+    >
+      {{ message.text }}
+    </p>
+  </div>
+
+  <div class="controls-container">
+    <input type="text" class="inputMessage" [(ngModel)]="messageToSend" />
+    <button type="button" class="buttonSend" (click)="btnSend()">Send</button>
+  </div>
+</div>

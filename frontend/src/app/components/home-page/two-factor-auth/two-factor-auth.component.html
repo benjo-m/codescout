@@ -1,0 +1,12 @@
+<div class="container">
+  <h5>Two-Factor Authentication</h5>
+  <div style="display: flex; gap: 20px">
+    <input
+      type="text"
+      placeholder="Enter your code here"
+      [(ngModel)]="twoFactorRequest.otp"
+      class="form-control"
+    />
+    <button class="btn btn-success" (click)="submitOtp()">Submit</button>
+  </div>
+</div>

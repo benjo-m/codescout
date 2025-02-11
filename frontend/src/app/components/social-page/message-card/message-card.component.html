@@ -1,0 +1,6 @@
+<div *ngIf="userId" class="container">
+  <p class="username">{{ username }}</p>
+  <p class="message-content">
+    {{ (isMessageFromCurrentUser() ? "You: " : "") + message?.text }}
+  </p>
+</div>

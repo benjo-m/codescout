@@ -1,0 +1,20 @@
+<nav>
+  <h2>CodeScout</h2>
+  <div class="navigation-div" *ngIf="authService.isSignedIn()">
+    <a routerLink="projects" routerLinkActive="active-link">PROJECTS</a>
+    <a routerLink="profile" routerLinkActive="active-link">PROFILE</a>
+    <a routerLink="social" routerLinkActive="active-link">SOCIAL</a>
+  </div>
+  <div class="buttons-div" *ngIf="!authService.isSignedIn()">
+    <a [routerLink]="['/register']">REGISTER</a>
+    <a [routerLink]="['/signin']">SIGN IN</a>
+  </div>
+
+  <i
+    *ngIf="authService.isSignedIn()"
+    class="bi bi-box-arrow-right signout-icon"
+    title="Sign out"
+    (click)="authService.signOut().subscribe()"
+    routerLink="signin"
+  ></i>
+</nav>

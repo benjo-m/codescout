@@ -1,0 +1,104 @@
+<div class="search-div">
+  <div class="menus">
+    <h4>
+      <a
+        href="javascript:void(0)"
+        (click)="changeMenu(true)"
+        [ngClass]="{ menuHighlighted: friendsMenuSelected }"
+        >Friends</a
+      >
+    </h4>
+    <h4 style="border-left: 2px solid dimgray">
+      <a
+        href="javascript:void(0)"
+        (click)="changeMenu(false)"
+        [ngClass]="{ menuHighlighted: !friendsMenuSelected }"
+        >Friend requests</a
+      >
+    </h4>
+  </div>
+
+  <div *ngIf="friendsMenuSelected" class="searchSubmenu">
+    <div class="filters">
+      <input
+        type="checkbox"
+        [(ngModel)]="searchAllUsers"
+        (ngModelChange)="refreshSearch(false)"
+      />
+      <label>Search all users</label>
+    </div>
+    <div class="search">
+      <input
+        class="search-bar"
+        type="text"
+        placeholder="Search users"
+        [(ngModel)]="searchName"
+        (ngModelChange)="refreshSearch()"
+      />
+      <i class="bi bi-search"></i>
+    </div>
+    <hr />
+    <div
+      *ngIf="searchedUsers.length"
+      class="userSearchDisplay"
+      #userSearchDisplay
+      (scroll)="onScrollGetUsers(userSearchDisplay)"
+    >
+      <h4
+        *ngFor="let su of searchedUsers"
+        class="searchedUser"
+        [routerLink]="'/profile/' + su.id"
+      >
+        {{ su?.name }}
+      </h4>
+    </div>
+  </div>
+
+  <div
+    *ngIf="!friendsMenuSelected && friendRequests.length"
+    class="friendRequestSubmenu"
+    #friendRequestDisplay
+    (scroll)="onScrollGetFriendRequests(friendRequestDisplay)"
+  >
+    <div *ngFor="let fr of friendRequests" class="requestDisplay">
+      <h4>{{ fr.senderName }}</h4>
+      <i
+        class="bi bi-check-circle acceptFriendRequest"
+        (click)="respondToFriendRequest(fr.id, true)"
+      ></i>
+      <i
+        class="bi bi-x-circle rejectFriendRequest"
+        (click)="respondToFriendRequest(fr.id, false)"
+      ></i>
+    </div>
+  </div>
+</div>
+
+<div class="messages-div">
+  <h5>MESSAGES</h5>
+  <div style="overflow-y: auto; margin-top: 50px">
+    <h6>{{ "New messages(" + newMessagesWithAllUsers.length + ")" }}</h6>
+    <div class="messages-container">
+      <p *ngIf="!newMessagesWithAllUsers.length">No new messages</p>
+      <div *ngIf="newMessagesWithAllUsers.length">
+        <app-message-card
+          *ngFor="let userMessage of newMessagesWithAllUsers"
+          [userId]="userMessage.userId"
+          [username]="userMessage.username"
+          [message]="getMessage(userMessage)"
+          (click)="openDirectMessages(userMessage.userId)"
+        ></app-message-card>
+      </div>
+    </div>
+    <h6>Recent messages</h6>
+    <div class="messages-container">
+      <app-message-card
+        *ngFor="let userMessage of lastMessagesWithAllUsers"
+        [userId]="userMessage.userId"
+        [username]="userMessage.username"
+        [message]="getMessage(userMessage)"
+        (click)="openDirectMessages(userMessage.userId)"
+      ></app-message-card>
+    </div>
+  </div>
+</div>

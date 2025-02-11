@@ -1,0 +1,23 @@
+.container {
+  height: 60px;
+  background-color: rgb(238, 238, 238);
+  margin-bottom: 10px;
+  border-radius: 10px;
+  display: flex;
+  color: black;
+  justify-content: space-between;
+  cursor: pointer;
+}
+
+.username {
+  margin-top: auto;
+  margin-bottom: auto;
+  margin-left: 5%;
+  font-weight: bold;
+}
+
+.message-content {
+  margin-top: auto;
+  margin-bottom: auto;
+  width: 70%;
+}

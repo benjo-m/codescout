@@ -1,0 +1,171 @@
+<div *ngIf="!isRecruiter" class="filters-div">
+  <div class="filter-option">
+    <h5>COMPANIES</h5>
+    <select
+      #companies
+      (change)="addCompany(companies.value)"
+      name="companies"
+      id="companies"
+      class="form-select"
+    >
+      <option value="" disabled selected>Select companies</option>
+      <option *ngFor="let company of companyList">
+        {{ company.name }}
+      </option>
+    </select>
+  </div>
+  <div class="tags-div">
+    <div *ngFor="let company of selectedCompanies" class="tag">
+      {{ company }}
+      <i
+        #companyTag
+        class="bi bi-x"
+        (click)="removeCompanyTag(companyTag.parentElement)"
+      ></i>
+    </div>
+    <p *ngIf="selectedCompanies.length == 0" class="empty-tags-div">
+      Selected companies will display here
+    </p>
+  </div>
+
+  <div class="filter-option">
+    <h5>TECHNOLOGIES</h5>
+    <select
+      #technologies
+      (change)="addTechnology(technologies.value)"
+      name="technologys"
+      id="technologys"
+      class="form-select"
+    >
+      <option value="" disabled selected>Select technologies</option>
+      <option *ngFor="let technology of technologyList" [value]="technology">
+        {{ technology }}
+      </option>
+    </select>
+  </div>
+  <div class="tags-div">
+    <p *ngFor="let technology of selectedTechnologies" class="tag">
+      {{ technology
+      }}<i
+        #langTag
+        (click)="removeTechnologyTag(langTag.parentElement)"
+        class="bi bi-x"
+      >
+      </i>
+    </p>
+    <p *ngIf="selectedTechnologies.length == 0" class="empty-tags-div">
+      Selected technologies will display here
+    </p>
+  </div>
+
+  <div class="filter-option">
+    <h5>POSITIONS</h5>
+    <select
+      #positions
+      (change)="addPosition(positions.value)"
+      name="positions"
+      id="positions"
+      class="form-select"
+    >
+      <option value="" disabled selected>Select positions</option>
+      <option *ngFor="let position of positionList" [value]="position">
+        {{ position }}
+      </option>
+    </select>
+  </div>
+  <div class="tags-div">
+    <p *ngFor="let position of selectedPositions" class="tag">
+      {{ position }}
+      <i
+        #posTag
+        class="bi bi-x"
+        (click)="removePositionTag(posTag.parentElement)"
+      ></i>
+    </p>
+    <p *ngIf="selectedPositions.length == 0" class="empty-tags-div">
+      Selected positions will display here
+    </p>
+  </div>
+</div>
+
+<div *ngIf="!isRecruiter" class="projects-div">
+  <div class="headings">
+    <div>
+      <h6>Company</h6>
+    </div>
+    <div>
+      <h6>Position</h6>
+    </div>
+    <div>
+      <h6>Project Name</h6>
+    </div>
+    <div>
+      <h6>Due Date</h6>
+    </div>
+  </div>
+  <div class="project-list">
+    <app-project-card
+      *ngFor="let project of projects"
+      [project]="project"
+      [routerLink]="['/projects', project.id]"
+    ></app-project-card>
+  </div>
+  <div class="no-projects" *ngIf="projects.length == 0">No projects</div>
+  <div class="buttons-container">
+    <i
+      [ngClass]="{ btns: page != 1, btnsDisabled: page == 1 }"
+      (click)="prevPage()"
+      class="bi bi-arrow-left btns"
+      title="Previous page"
+    ></i>
+    <p class="pages">{{ page }} / {{ totalPages }}</p>
+    <i
+      [ngClass]="{
+        btns: page != totalPages,
+        btnsDisabled: page == totalPages
+      }"
+      (click)="nextPage()"
+      class="bi bi-arrow-right btns"
+      title="Next page"
+    ></i>
+  </div>
+</div>
+
+<div *ngIf="isRecruiter" class="recruiter-projects-div">
+  <h5>PROJECTS</h5>
+  <div class="project-stats">
+    <div style="display: flex; width: 25%; justify-content: space-between">
+      <p>Total Projects: {{ projects.length }}</p>
+    </div>
+    <button
+      routerLink="/projects/create"
+      class="btn btn-success new-project-btn"
+    >
+      New Project
+    </button>
+  </div>
+
+  <div class="recruiter-projects-container">
+    <div *ngFor="let project of projects" class="card">
+      <div class="project-info-div">
+        <div>{{ project.position }}</div>
+        <div>{{ project.name }}</div>
+        <div>{{ project.dueDate }}</div>
+      </div>
+      <div class="buttons-div">
+        <button
+          class="btn btn-primary delete-btn"
+          [routerLink]="['/projects', project.id]"
+        >
+          Details
+        </button>
+        <button
+          class="btn btn-danger delete-btn"
+          (click)="deleteProject(project.id)"
+        >
+          Delete
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

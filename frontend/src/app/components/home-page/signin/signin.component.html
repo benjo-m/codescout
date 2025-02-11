@@ -1,0 +1,39 @@
+<div class="container">
+  <h1>Sign In</h1>
+  <form>
+    <label for="username">Username</label>
+    <input
+      id="username"
+      name="username"
+      type="text"
+      class="form-control"
+      required
+      [(ngModel)]="signInRequest.username"
+    />
+
+    <label for="password">Password</label>
+    <input
+      id="password"
+      name="password"
+      type="password"
+      class="form-control"
+      required
+      [(ngModel)]="signInRequest.password"
+    />
+    <div class="buttons">
+      <button routerLink="/" class="back btn btn-danger" type="button">
+        Close
+      </button>
+      <button
+        (click)="signIn(this.signInRequest)"
+        class="next btn btn-success"
+        [disabled]="
+          signInRequest.password == '' && signInRequest.password == ''
+        "
+      >
+        Sign In
+      </button>
+    </div>
+  </form>
+  <p>Don't have an account? <a routerLink="/register">Register</a></p>
+</div>

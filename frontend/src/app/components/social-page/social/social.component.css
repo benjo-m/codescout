@@ -1,0 +1,175 @@
+:host {
+  display: flex;
+  justify-content: center;
+  margin-left: 5%;
+  margin-right: 5%;
+  margin-top: 3%;
+  gap: 30px;
+}
+
+.search-div,
+.messages-div {
+  background-color: #383b43;
+  border-radius: 10px;
+}
+
+.search-div {
+  height: 80vh;
+  width: 25%;
+}
+
+.filters {
+  padding-top: 30px;
+  margin-left: 5%;
+  margin-right: 5%;
+}
+
+.filters > label {
+  padding-left: 3%;
+}
+
+.menus {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  height: 8.5%;
+  padding-top: 3%;
+  border-bottom: 3px solid dimgray;
+}
+
+.menus > h4 {
+  width: 50%;
+  text-align: center;
+}
+
+.menus > h4 > a {
+  color: #ffffff;
+  text-decoration: none;
+  padding: 1% 6%;
+}
+
+.menus > h4 > a:hover {
+  background-color: #464749;
+}
+
+.menuHighlighted {
+  background-color: #27282b;
+}
+
+.searchSubmenu {
+  height: 90%;
+}
+
+.friendRequestSubmenu {
+  height: 91%;
+  overflow-y: auto;
+}
+
+.search {
+  display: flex;
+  padding-top: 30px;
+  margin-left: 5%;
+  margin-right: 5%;
+  justify-content: space-between;
+}
+
+.search ::placeholder {
+  color: white;
+}
+
+.search-bar {
+  width: 80%;
+  background-color: transparent;
+  border-color: transparent;
+  color: white;
+}
+
+.search-bar:focus {
+  outline: none;
+}
+
+.userSearchDisplay {
+  height: 75%;
+  overflow-y: auto;
+}
+
+.searchedUser {
+  text-align: center;
+  padding-top: 1%;
+  padding-bottom: 1%;
+  margin-left: 10%;
+  margin-right: 10%;
+  margin-bottom: 2%;
+  border-radius: 10px;
+  color: black;
+  background-color: aliceblue;
+}
+
+.searchedUser:hover {
+  cursor: pointer;
+}
+
+.requestDisplay {
+  display: flex;
+  flex-direction: row;
+  padding: 3% 5% 0 5%;
+}
+
+.requestDisplay > h4 {
+  align-self: flex-start;
+  width: 80%;
+}
+
+.requestDisplay > i {
+  align-self: flex-end;
+  padding: 0 2%;
+}
+
+.requestDisplay > i:hover {
+  background-color: #464749;
+}
+
+.acceptFriendRequest {
+  color: green;
+}
+
+.rejectFriendRequest {
+  color: red;
+}
+
+.messages-div {
+  height: 80vh;
+  width: 55%;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+i {
+  font-size: 24px;
+}
+
+hr {
+  width: 90%;
+  margin: auto;
+  margin-top: 10px;
+  margin-bottom: 20px;
+  border-width: 2px;
+}
+
+a {
+  border-radius: 10px;
+}
+
+.messages-container {
+  margin-bottom: 50px;
+}
+
+h5 {
+  background-color: #595d66;
+  padding: 8px;
+  border-radius: 10px;
+  text-align: center;
+  margin-bottom: 20px;
+  font-weight: bold;
+  margin-top: 20px;
+}

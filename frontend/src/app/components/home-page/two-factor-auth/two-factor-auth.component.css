@@ -1,0 +1,23 @@
+.container {
+  justify-content: center;
+  gap: 20px;
+  width: 20%;
+  margin-top: 50px;
+  flex-direction: column;
+  background-color: #383b43;
+  padding: 30px;
+  border-radius: 10px;
+}
+
+button {
+  font-weight: bold;
+}
+
+h5 {
+  background-color: #595d66;
+  padding: 8px;
+  border-radius: 10px;
+  text-align: center;
+  margin-bottom: 50px;
+  font-weight: bold;
+}

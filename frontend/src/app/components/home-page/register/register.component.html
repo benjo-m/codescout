@@ -1,0 +1,164 @@
+<div class="container">
+  <h1>Register</h1>
+  <form>
+    <div *ngIf="page == 1">
+      <label for="role">Role</label>
+      <select class="form-select" id="role" [(ngModel)]="user.role" name="role">
+        <option value="" selected disabled>Select your role</option>
+        <option value="candidate">Candidate</option>
+        <option value="recruiter">Recruiter</option>
+      </select>
+      <div *ngIf="companyRegistered && user.role == 'recruiter'">
+        <label for="companies">Companies</label>
+        <select
+          class="form-select"
+          id="company"
+          [(ngModel)]="user.company"
+          name="company"
+        >
+          <option value="" selected disabled>Select your company</option>
+          <option *ngFor="let company of companyList" [value]="company.name">
+            {{ company.name }}
+          </option>
+        </select>
+        <p>
+          Company not registered?
+          <span (click)="companyRegistered = !companyRegistered"
+            >Register new company</span
+          >
+        </p>
+      </div>
+      <div *ngIf="!companyRegistered && user.role == 'recruiter'">
+        <label for="companyName">Company Name</label>
+        <input
+          id="companyName"
+          type="text"
+          class="form-control"
+          [(ngModel)]="company.name"
+          name="companyName"
+          placeholder="Company's name"
+        />
+        <div class="country">
+          <label for="company-country">Company Country</label>
+          <select
+            id="company-country"
+            class="form-select"
+            [(ngModel)]="company.address.country"
+            name="country"
+          >
+            <option value="" selected disabled>
+              Choose your company's country
+            </option>
+            <option
+              *ngFor="let country of countriesList"
+              [value]="country.name"
+            >
+              {{ country.name }}
+            </option>
+          </select>
+          <div>
+            <label for="company-city">Company City</label>
+            <input
+              id="company-city"
+              type="text"
+              class="form-control"
+              [(ngModel)]="company.address.city"
+              name="company-city"
+              placeholder="Company's city"
+            />
+          </div>
+          <div>
+            <label for="company-street">Company Street</label>
+            <input
+              id="company-street"
+              type="text"
+              class="form-control"
+              [(ngModel)]="company.address.street"
+              name="company-street"
+              placeholder="Company's street"
+            />
+          </div>
+          <div>
+            <label for="company-postalCode">Company Postal Code</label>
+            <input
+              id="company-postalCode"
+              type="text"
+              class="form-control"
+              [(ngModel)]="company.address.postalCode"
+              name="company-postalCode"
+              placeholder="Company's postal code"
+            />
+          </div>
+        </div>
+        <p *ngIf="!companyRegistered">
+          Company already registered?
+          <span (click)="companyRegistered = !companyRegistered"
+            >Select company</span
+          >
+        </p>
+      </div>
+    </div>
+
+    <div *ngIf="page == 2">
+      <label for="username">Username</label>
+      <input
+        id="username"
+        type="text"
+        class="form-control"
+        [(ngModel)]="user.username"
+        name="username"
+        required
+        placeholder="John"
+      />
+      <label for="email">Email</label>
+      <input
+        id="email"
+        type="text"
+        class="form-control"
+        [(ngModel)]="user.email"
+        name="email"
+        required
+        placeholder="johndoe@example.com"
+      />
+      <label for="password">Password</label>
+      <input
+        id="password"
+        type="password"
+        class="form-control"
+        [(ngModel)]="user.password"
+        name="password"
+        required
+      />
+    </div>
+    <div class="buttons">
+      <button
+        class="back btn btn-danger"
+        (click)="previousPage()"
+        [routerLink]="page == 1 ? ['/'] : []"
+      >
+        {{ page == 1 ? "Close" : "Back" }}
+      </button>
+
+      <button
+        *ngIf="page == 1"
+        class="next btn btn-success"
+        (click)="nextButtonEnabled() && nextPage()"
+        [disabled]="!nextButtonEnabled()"
+        type="submit"
+      >
+        Next
+      </button>
+
+      <button
+        *ngIf="page == 2"
+        class="next btn btn-success"
+        (click)="registerButtonEnabled() && register(user, company)"
+        [disabled]="!registerButtonEnabled()"
+      >
+        Register
+      </button>
+    </div>
+  </form>
+
+  <p>Already have an account? <a routerLink="/signin">Sign In</a></p>
+</div>

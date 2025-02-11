@@ -1,0 +1,94 @@
+<div class="container">
+  <div class="account">
+    <h5>ACCOUNT</h5>
+    <label for="username">Username</label>
+    <input
+      id="username"
+      type="text"
+      class="form-control"
+      [(ngModel)]="editUserRequest.username"
+      name="username"
+    />
+
+    <label for="email">Email</label>
+    <input
+      id="email"
+      type="text"
+      class="form-control"
+      [(ngModel)]="editUserRequest.email"
+      name="email"
+    />
+    <div class="two">
+      <label for="2fa">Two-Factor Authentication </label>
+      <input
+        type="checkbox"
+        name="2fa"
+        id="2fa"
+        class="form-check-input"
+        style="padding: 10px"
+        [(ngModel)]="editUserRequest.twoFactorEnabled"
+      />
+    </div>
+  </div>
+  <div class="socials">
+    <h5>SOCIALS</h5>
+    <label for="github">GitHub</label>
+    <input
+      id="github"
+      type="text"
+      class="form-control"
+      [(ngModel)]="editUserRequest.gitHub"
+      name="github"
+    />
+
+    <label for="linkedin">LinkedIn</label>
+    <input
+      id="linkedin"
+      type="text"
+      class="form-control"
+      [(ngModel)]="editUserRequest.linkedIn"
+      name="linkedin"
+    />
+
+    <label for="stackoverflow">Stack Overflow</label>
+    <input
+      id="stackoverflow"
+      type="text"
+      class="form-control"
+      [(ngModel)]="editUserRequest.stackOverflow"
+      name="stackoverflow"
+    />
+
+    <label for="x">X</label>
+    <input
+      id="x"
+      type="text"
+      class="form-control"
+      [(ngModel)]="editUserRequest.x"
+      name="x"
+    />
+
+    <label for="medium">Medium</label>
+    <input
+      id="medium"
+      type="text"
+      class="form-control"
+      [(ngModel)]="editUserRequest.medium"
+      name="medium"
+    />
+  </div>
+  <div class="bio">
+    <h5>ABOUT ME</h5>
+    <textarea name="bio" id="bio" [(ngModel)]="editUserRequest.biography">{{
+      editUserRequest.biography
+    }}</textarea>
+  </div>
+  <div class="buttons-div">
+    <button class="back btn btn-danger btn-discard" (click)="discardChanges()">
+      Discard Changes
+    </button>
+    <button class="back btn btn-success btn-save" (click)="saveChanges()">
+      Save Changes
+    </button>
+  </div>
+</div>

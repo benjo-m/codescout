@@ -1,0 +1,50 @@
+<div *ngIf="isRecruiter" class="container">
+  <h5>CREATE PROJECT</h5>
+  <div class="cont2">
+    <div class="cont3">
+      <div class="item">
+        <span class="lbl">Project name:</span>
+        <br>
+        <input type="text" [(ngModel)]="project.name">
+      </div>
+
+      <div class="item">
+        <span class="lbl">Select work arrangement:</span>
+        <br>
+        <select>
+          <option *ngFor="let wa of workArrangements" [selected]="wa == project.workArrangement" (click)="selectWorkArrangement(wa)">{{wa}}</option>
+        </select>
+      </div>
+      <div class="item">
+        <span class="lbl">Select position:</span>
+        <br>
+        <select>
+          <option *ngFor="let p of positions" [selected]="p == project.position" (click)="selectPosition(p)">{{p}}</option>
+        </select>
+      </div>
+      <br />
+      <span class="lbl">Select technologies:</span>
+      <div class="technologies-div">
+        <div *ngFor="let t of technologies" class="technology-div">
+          <input type="checkbox" (click)="selectTechnology(t)">
+          <label>{{ t }}</label>
+        </div>
+      </div>
+      <div class="item">
+        <span class="lbl">Select due date:</span>
+        <br>
+        <input type="date" [(ngModel)]="dueDate">
+      </div>
+    </div>
+    <div class="desc-div item">
+      <span class="lbl">Write description:</span>
+      <br>
+      <textarea [(ngModel)]="project.description"></textarea>
+    </div>
+  </div>
+
+  <div class="buttons">
+    <button class="btn btn-danger" routerLink="/projects">Close</button>
+    <button class="btn btn-success" (click)="createProject()">Create</button>
+  </div>
+</div>
